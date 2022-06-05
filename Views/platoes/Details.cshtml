@@ -1,0 +1,98 @@
+﻿@model RecetarioMVC1.Models.plato
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>plato</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_plato)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_plato)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ingredientes_principal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ingredientes_principal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.comentario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comentario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.calorias)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.calorias)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cant_ingredientes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cant_ingredientes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.porcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.porcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.activo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.receta.fuente_receta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.receta.fuente_receta)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.cod_plato }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,87 @@
+﻿@model IEnumerable<RecetarioMVC1.Models.plato>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tipo_plato)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ingredientes_principal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.precio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.comentario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.calorias)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cant_ingredientes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.porcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.activo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.receta.fuente_receta)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tipo_plato)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ingredientes_principal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.precio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.comentario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.calorias)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cant_ingredientes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.porcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.activo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.receta.fuente_receta)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.cod_plato }) |
+            @Html.ActionLink("Details", "Details", new { id=item.cod_plato }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.cod_plato })
+        </td>
+    </tr>
+}
+
+</table>

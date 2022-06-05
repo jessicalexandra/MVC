@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="recetarioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="menu">
+    <Key>
+      <PropertyRef Name="cod_menu" />
+    </Key>
+    <Property Name="cod_menu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cod_receta" Type="Int32" Nullable="false" />
+    <Property Name="nombre_menu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="precio_menu" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="comentario_menu" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="activo" Type="Boolean" />
+    <NavigationProperty Name="receta" Relationship="Self.fk_menu_receta" FromRole="menu" ToRole="receta" />
+  </EntityType>
+  <EntityType Name="plato">
+    <Key>
+      <PropertyRef Name="cod_plato" />
+    </Key>
+    <Property Name="cod_plato" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cod_receta" Type="Int32" Nullable="false" />
+    <Property Name="tipo_plato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ingredientes_principal" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="precio" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="comentario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="calorias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cant_ingredientes" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="porcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="activo" Type="Boolean" />
+    <NavigationProperty Name="receta" Relationship="Self.fk_plato_receta" FromRole="plato" ToRole="receta" />
+  </EntityType>
+  <EntityType Name="receta">
+    <Key>
+      <PropertyRef Name="cod_receta" />
+    </Key>
+    <Property Name="cod_receta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fuente_receta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ubicacion_fisica_receta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lista_ingredientes_receta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="utensilios_receta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="comentario_receta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="tiempo_receta" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="activo" Type="Boolean" />
+    <NavigationProperty Name="menu" Relationship="Self.fk_menu_receta" FromRole="receta" ToRole="menu" />
+    <NavigationProperty Name="plato" Relationship="Self.fk_plato_receta" FromRole="receta" ToRole="plato" />
+  </EntityType>
+  <Association Name="fk_menu_receta">
+    <End Role="receta" Type="Self.receta" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="menu" Type="Self.menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="receta">
+        <PropertyRef Name="cod_receta" />
+      </Principal>
+      <Dependent Role="menu">
+        <PropertyRef Name="cod_receta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_plato_receta">
+    <End Role="receta" Type="Self.receta" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="plato" Type="Self.plato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="receta">
+        <PropertyRef Name="cod_receta" />
+      </Principal>
+      <Dependent Role="plato">
+        <PropertyRef Name="cod_receta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="recetarioEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="menu" EntityType="Self.menu" />
+    <EntitySet Name="plato" EntityType="Self.plato" />
+    <EntitySet Name="receta" EntityType="Self.receta" />
+    <AssociationSet Name="fk_menu_receta" Association="Self.fk_menu_receta">
+      <End Role="receta" EntitySet="receta" />
+      <End Role="menu" EntitySet="menu" />
+    </AssociationSet>
+    <AssociationSet Name="fk_plato_receta" Association="Self.fk_plato_receta">
+      <End Role="receta" EntitySet="receta" />
+      <End Role="plato" EntitySet="plato" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="recetarioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="menu">
+          <Key>
+            <PropertyRef Name="cod_menu" />
+          </Key>
+          <Property Name="cod_menu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cod_receta" Type="int" Nullable="false" />
+          <Property Name="nombre_menu" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="precio_menu" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="comentario_menu" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="plato">
+          <Key>
+            <PropertyRef Name="cod_plato" />
+          </Key>
+          <Property Name="cod_plato" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cod_receta" Type="int" Nullable="false" />
+          <Property Name="tipo_plato" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ingredientes_principal" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="precio" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="comentario" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="calorias" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="cant_ingredientes" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="porcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="receta">
+          <Key>
+            <PropertyRef Name="cod_receta" />
+          </Key>
+          <Property Name="cod_receta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fuente_receta" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ubicacion_fisica_receta" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="lista_ingredientes_receta" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="utensilios_receta" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="comentario_receta" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="tiempo_receta" Type="time" Precision="7" Nullable="false" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <Association Name="fk_menu_receta">
+          <End Role="receta" Type="Self.receta" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="menu" Type="Self.menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="receta">
+              <PropertyRef Name="cod_receta" />
+            </Principal>
+            <Dependent Role="menu">
+              <PropertyRef Name="cod_receta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_plato_receta">
+          <End Role="receta" Type="Self.receta" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="plato" Type="Self.plato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="receta">
+              <PropertyRef Name="cod_receta" />
+            </Principal>
+            <Dependent Role="plato">
+              <PropertyRef Name="cod_receta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="recetarioModelStoreContainer">
+          <EntitySet Name="menu" EntityType="Self.menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="plato" EntityType="Self.plato" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="receta" EntityType="Self.receta" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_menu_receta" Association="Self.fk_menu_receta">
+            <End Role="receta" EntitySet="receta" />
+            <End Role="menu" EntitySet="menu" />
+          </AssociationSet>
+          <AssociationSet Name="fk_plato_receta" Association="Self.fk_plato_receta">
+            <End Role="receta" EntitySet="receta" />
+            <End Role="plato" EntitySet="plato" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="recetarioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="menu">
+          <Key>
+            <PropertyRef Name="cod_menu" />
+          </Key>
+          <Property Name="cod_menu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cod_receta" Type="Int32" Nullable="false" />
+          <Property Name="nombre_menu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="precio_menu" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="comentario_menu" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="receta" Relationship="Self.fk_menu_receta" FromRole="menu" ToRole="receta" />
+        </EntityType>
+        <EntityType Name="plato">
+          <Key>
+            <PropertyRef Name="cod_plato" />
+          </Key>
+          <Property Name="cod_plato" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cod_receta" Type="Int32" Nullable="false" />
+          <Property Name="tipo_plato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ingredientes_principal" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="precio" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="comentario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="calorias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cant_ingredientes" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="porcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="receta" Relationship="Self.fk_plato_receta" FromRole="plato" ToRole="receta" />
+        </EntityType>
+        <EntityType Name="receta">
+          <Key>
+            <PropertyRef Name="cod_receta" />
+          </Key>
+          <Property Name="cod_receta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fuente_receta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ubicacion_fisica_receta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lista_ingredientes_receta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="utensilios_receta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="comentario_receta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tiempo_receta" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="menu" Relationship="Self.fk_menu_receta" FromRole="receta" ToRole="menu" />
+          <NavigationProperty Name="plato" Relationship="Self.fk_plato_receta" FromRole="receta" ToRole="plato" />
+        </EntityType>
+        <Association Name="fk_menu_receta">
+          <End Role="receta" Type="Self.receta" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="menu" Type="Self.menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="receta">
+              <PropertyRef Name="cod_receta" />
+            </Principal>
+            <Dependent Role="menu">
+              <PropertyRef Name="cod_receta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_plato_receta">
+          <End Role="receta" Type="Self.receta" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="plato" Type="Self.plato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="receta">
+              <PropertyRef Name="cod_receta" />
+            </Principal>
+            <Dependent Role="plato">
+              <PropertyRef Name="cod_receta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="recetarioEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="menu" EntityType="Self.menu" />
+          <EntitySet Name="plato" EntityType="Self.plato" />
+          <EntitySet Name="receta" EntityType="Self.receta" />
+          <AssociationSet Name="fk_menu_receta" Association="Self.fk_menu_receta">
+            <End Role="receta" EntitySet="receta" />
+            <End Role="menu" EntitySet="menu" />
+          </AssociationSet>
+          <AssociationSet Name="fk_plato_receta" Association="Self.fk_plato_receta">
+            <End Role="receta" EntitySet="receta" />
+            <End Role="plato" EntitySet="plato" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="recetarioModelStoreContainer" CdmEntityContainer="recetarioEntities">
+          <EntitySetMapping Name="menu">
+            <EntityTypeMapping TypeName="recetarioModel.menu">
+              <MappingFragment StoreEntitySet="menu">
+                <ScalarProperty Name="cod_menu" ColumnName="cod_menu" />
+                <ScalarProperty Name="cod_receta" ColumnName="cod_receta" />
+                <ScalarProperty Name="nombre_menu" ColumnName="nombre_menu" />
+                <ScalarProperty Name="precio_menu" ColumnName="precio_menu" />
+                <ScalarProperty Name="comentario_menu" ColumnName="comentario_menu" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="plato">
+            <EntityTypeMapping TypeName="recetarioModel.plato">
+              <MappingFragment StoreEntitySet="plato">
+                <ScalarProperty Name="cod_plato" ColumnName="cod_plato" />
+                <ScalarProperty Name="cod_receta" ColumnName="cod_receta" />
+                <ScalarProperty Name="tipo_plato" ColumnName="tipo_plato" />
+                <ScalarProperty Name="ingredientes_principal" ColumnName="ingredientes_principal" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="calorias" ColumnName="calorias" />
+                <ScalarProperty Name="cant_ingredientes" ColumnName="cant_ingredientes" />
+                <ScalarProperty Name="porcion" ColumnName="porcion" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="receta">
+            <EntityTypeMapping TypeName="recetarioModel.receta">
+              <MappingFragment StoreEntitySet="receta">
+                <ScalarProperty Name="cod_receta" ColumnName="cod_receta" />
+                <ScalarProperty Name="fuente_receta" ColumnName="fuente_receta" />
+                <ScalarProperty Name="ubicacion_fisica_receta" ColumnName="ubicacion_fisica_receta" />
+                <ScalarProperty Name="lista_ingredientes_receta" ColumnName="lista_ingredientes_receta" />
+                <ScalarProperty Name="utensilios_receta" ColumnName="utensilios_receta" />
+                <ScalarProperty Name="comentario_receta" ColumnName="comentario_receta" />
+                <ScalarProperty Name="tiempo_receta" ColumnName="tiempo_receta" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

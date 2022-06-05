@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="recetarioModelStoreContainer" CdmEntityContainer="recetarioEntities">
+    <EntitySetMapping Name="menu">
+      <EntityTypeMapping TypeName="recetarioModel.menu">
+        <MappingFragment StoreEntitySet="menu">
+          <ScalarProperty Name="cod_menu" ColumnName="cod_menu" />
+          <ScalarProperty Name="cod_receta" ColumnName="cod_receta" />
+          <ScalarProperty Name="nombre_menu" ColumnName="nombre_menu" />
+          <ScalarProperty Name="precio_menu" ColumnName="precio_menu" />
+          <ScalarProperty Name="comentario_menu" ColumnName="comentario_menu" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="plato">
+      <EntityTypeMapping TypeName="recetarioModel.plato">
+        <MappingFragment StoreEntitySet="plato">
+          <ScalarProperty Name="cod_plato" ColumnName="cod_plato" />
+          <ScalarProperty Name="cod_receta" ColumnName="cod_receta" />
+          <ScalarProperty Name="tipo_plato" ColumnName="tipo_plato" />
+          <ScalarProperty Name="ingredientes_principal" ColumnName="ingredientes_principal" />
+          <ScalarProperty Name="precio" ColumnName="precio" />
+          <ScalarProperty Name="comentario" ColumnName="comentario" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="calorias" ColumnName="calorias" />
+          <ScalarProperty Name="cant_ingredientes" ColumnName="cant_ingredientes" />
+          <ScalarProperty Name="porcion" ColumnName="porcion" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="receta">
+      <EntityTypeMapping TypeName="recetarioModel.receta">
+        <MappingFragment StoreEntitySet="receta">
+          <ScalarProperty Name="cod_receta" ColumnName="cod_receta" />
+          <ScalarProperty Name="fuente_receta" ColumnName="fuente_receta" />
+          <ScalarProperty Name="ubicacion_fisica_receta" ColumnName="ubicacion_fisica_receta" />
+          <ScalarProperty Name="lista_ingredientes_receta" ColumnName="lista_ingredientes_receta" />
+          <ScalarProperty Name="utensilios_receta" ColumnName="utensilios_receta" />
+          <ScalarProperty Name="comentario_receta" ColumnName="comentario_receta" />
+          <ScalarProperty Name="tiempo_receta" ColumnName="tiempo_receta" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

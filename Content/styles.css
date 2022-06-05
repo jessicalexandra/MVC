@@ -1,0 +1,14 @@
+﻿.logo {
+    background-image: url('../img/istockphoto-1225430867-170667a.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
+}
+
+.logo img{
+    object-fit: cover;
+    height: auto;
+    max-width: 100%;
+    display: block;
+}

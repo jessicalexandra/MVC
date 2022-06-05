@@ -1,0 +1,74 @@
+﻿@model RecetarioMVC1.Models.receta
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>receta</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fuente_receta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fuente_receta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ubicacion_fisica_receta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ubicacion_fisica_receta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lista_ingredientes_receta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lista_ingredientes_receta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.utensilios_receta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.utensilios_receta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.comentario_receta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comentario_receta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tiempo_receta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tiempo_receta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.activo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.cod_receta }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

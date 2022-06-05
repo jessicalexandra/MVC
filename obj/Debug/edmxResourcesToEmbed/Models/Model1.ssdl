@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="recetarioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="menu">
+    <Key>
+      <PropertyRef Name="cod_menu" />
+    </Key>
+    <Property Name="cod_menu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cod_receta" Type="int" Nullable="false" />
+    <Property Name="nombre_menu" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="precio_menu" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="comentario_menu" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="activo" Type="bit" />
+  </EntityType>
+  <EntityType Name="plato">
+    <Key>
+      <PropertyRef Name="cod_plato" />
+    </Key>
+    <Property Name="cod_plato" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cod_receta" Type="int" Nullable="false" />
+    <Property Name="tipo_plato" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ingredientes_principal" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="precio" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="comentario" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="calorias" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="cant_ingredientes" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="porcion" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="activo" Type="bit" />
+  </EntityType>
+  <EntityType Name="receta">
+    <Key>
+      <PropertyRef Name="cod_receta" />
+    </Key>
+    <Property Name="cod_receta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fuente_receta" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ubicacion_fisica_receta" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="lista_ingredientes_receta" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="utensilios_receta" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="comentario_receta" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="tiempo_receta" Type="time" Precision="7" Nullable="false" />
+    <Property Name="activo" Type="bit" />
+  </EntityType>
+  <Association Name="fk_menu_receta">
+    <End Role="receta" Type="Self.receta" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="menu" Type="Self.menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="receta">
+        <PropertyRef Name="cod_receta" />
+      </Principal>
+      <Dependent Role="menu">
+        <PropertyRef Name="cod_receta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_plato_receta">
+    <End Role="receta" Type="Self.receta" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="plato" Type="Self.plato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="receta">
+        <PropertyRef Name="cod_receta" />
+      </Principal>
+      <Dependent Role="plato">
+        <PropertyRef Name="cod_receta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="recetarioModelStoreContainer">
+    <EntitySet Name="menu" EntityType="Self.menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="plato" EntityType="Self.plato" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="receta" EntityType="Self.receta" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_menu_receta" Association="Self.fk_menu_receta">
+      <End Role="receta" EntitySet="receta" />
+      <End Role="menu" EntitySet="menu" />
+    </AssociationSet>
+    <AssociationSet Name="fk_plato_receta" Association="Self.fk_plato_receta">
+      <End Role="receta" EntitySet="receta" />
+      <End Role="plato" EntitySet="plato" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

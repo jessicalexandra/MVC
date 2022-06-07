@@ -72,7 +72,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="recetarioEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="recetarioEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="menu" EntityType="Self.menu" />
     <EntitySet Name="plato" EntityType="Self.plato" />
     <EntitySet Name="receta" EntityType="Self.receta" />

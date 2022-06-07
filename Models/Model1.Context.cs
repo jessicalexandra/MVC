@@ -13,10 +13,10 @@ namespace RecetarioMVC1.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class recetarioEntities : DbContext
+    public partial class recetarioEntities1 : DbContext
     {
-        public recetarioEntities()
-            : base("name=recetarioEntities")
+        public recetarioEntities1()
+            : base("name=recetarioEntities1")
         {
         }
     

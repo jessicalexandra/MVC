@@ -163,7 +163,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="recetarioEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="recetarioEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="menu" EntityType="Self.menu" />
           <EntitySet Name="plato" EntityType="Self.plato" />
           <EntitySet Name="receta" EntityType="Self.receta" />
@@ -181,7 +181,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="recetarioModelStoreContainer" CdmEntityContainer="recetarioEntities">
+        <EntityContainerMapping StorageEntityContainer="recetarioModelStoreContainer" CdmEntityContainer="recetarioEntities1">
           <EntitySetMapping Name="menu">
             <EntityTypeMapping TypeName="recetarioModel.menu">
               <MappingFragment StoreEntitySet="menu">

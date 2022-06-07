@@ -12,3 +12,20 @@
     max-width: 100%;
     display: block;
 }
+
+.ejemplo {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.content-home {
+    border-radius: 5px;
+    margin-top: 70px;
+    height: 130px;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+table {
+    color: #fff;
+    text-align: center;
+}

@@ -12,7 +12,7 @@ namespace RecetarioMVC1.Controllers
 {
     public class platoesController : Controller
     {
-        private recetarioEntities db = new recetarioEntities();
+        private recetarioEntities1 db = new recetarioEntities1();
 
         // GET: platoes
         public ActionResult Index()
